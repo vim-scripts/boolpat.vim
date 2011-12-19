@@ -1,0 +1,33 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3850
+
+This is just like vimscript #1290 but with simpler syntax.
+
+:BoolPat {expr}
+
+converts boolean-logic pattern {expr} into a normal regexp pattern and searches for it.  Basically, {expr} can be any regexp pattern with some special characters in it for boolean operators:
+
+	! is logical NOT, | or || is logical OR, & or && is logical AND
+	(...) is for grouping, whitespace separates items, '...' quotes characters
+
+Quoting: Single quotes '...' literally include special characters and whitespace in the pattern.  Two single quotes '' result in one single quote, inside or outside of '...'.
+
+:BoolPat abc
+will search for lines containing the string "abc", using the pattern .*abc.*
+
+:BoolPat !abc
+will search for lines which don't contain the string "abc", using the pattern ^\%(\%(abc\)\@!.\)*$
+
+:BoolPat abc|def
+will search for lines which contain either the string "abc" or the string "def"
+
+:BoolPat !(abc | def)
+will search for lines which don't contain either of the strings "abc" or "def"
+
+:BoolPat abc & def
+will search for lines which contain both of the strings "abc" and "def" 
+
+:BoolPat abc' & ''def'
+will search for lines which contain the string "abc & 'def"
+
+:BoolPat abc''def
+will search for lines which contain the string "abc'def"
