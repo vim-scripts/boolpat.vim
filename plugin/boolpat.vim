@@ -1,11 +1,11 @@
 " Vim plugin -- Boolean-logic based regular expression pattern matching
 " File:         boolpat.vim
 " Created:      2011 Nov 30
-" Last Change:  2011 Dec 18
-" Rev Days:     4
+" Last Change:  2012 Jan 28
+" Rev Days:     6
 " Author:       Andy Wokula <anwoku@yahoo.de>
 " License:      Vim License, see :h license
-" Version:      0.1
+" Version:      0.1.1
 "
 " Based on  LogiPat v3c, Copyright (C) 1999-2006 Charles E. Campbell, Jr.
 "           http://vim.sf.net/scripts/script.php?script_id=1290
@@ -102,6 +102,7 @@ func! s:MakePatAndSearch(args)
       let sres = search(pat)
     endif
     let @/ = pat
+    call histadd("search", pat)
     if sres == 0
       echoerr 'BoolPat: Pattern not found:' pat
     endif
